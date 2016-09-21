@@ -1,7 +1,7 @@
 
 function MostrarError()
 {
-	var funcionAjax=$.ajax({url:"nexoNoExiste.php",type:"post",data:{queHacer:"MostrarTexto"}});
+	/*var funcionAjax=$.ajax({url:"nexoNoExiste.php",type:"post",data:{queHacer:"MostrarTexto"}});
 	funcionAjax.done(function(retorno){
 		$("#principal").html(retorno);
 		$("#informe").html("Correcto!!!");
@@ -12,13 +12,39 @@ function MostrarError()
 	});
 	funcionAjax.always(function(retorno){
 		//alert("siempre "+retorno.statusText);
-	});
+	});*/
+
+
+$.ajax({url:"nexoNoExiste.php"}).then(function(datos){
+
+alert("primero");
+
+},function(error){
+
+console.info("objeto respuesta",error);
+	alert("segundo"+error);
+$("#informe").html(error.responseText);
+});//todas terminana en .then()
+
+
+
 }
 function MostrarSinParametros()
 {
-	var funcionAjax=$.ajax({url:"nexoTexto.php"});
+	//var funcionAjax=$.ajax({url:"nexoTexto.php"});
 
-	funcionAjax.done(function(retorno){
+	$.ajax({url:"nexoTexto.php"})
+	.then(function ok(respuesta){
+
+		alert(respuesta);
+
+	},function mal(error){
+		alert(error);
+	});
+//funciones ajax pueden ser anonimas o no,qe pueden tener un nombre o no.
+
+
+	/*funcionAjax.done(function(retorno){
 		$("#principal").html(retorno);
 		$("#informe").html("Correcto!!!");
 	});
@@ -29,13 +55,13 @@ function MostrarSinParametros()
 	funcionAjax.always(function(retorno){
 		//alert("siempre "+retorno.statusText);
 
-	});
+	});*/
 }
 
 function Mostrar(queMostrar)
 {
 		//alert(queMostrar);
-	var funcionAjax=$.ajax({
+	/*var funcionAjax=$.ajax({
 		url:"nexo.php",
 		type:"post",
 		data:{queHacer:queMostrar}
@@ -51,7 +77,19 @@ function Mostrar(queMostrar)
 	funcionAjax.always(function(retorno){
 		//alert("siempre "+retorno.statusText);
 
-	});
+	});*/
+
+
+$.ajax({url:"nexo.php",type:"post",data:{queHacer:queMostrar}}).then(function(exito){
+
+$("#principal").html(exito);
+
+},function(error){
+
+});//callback las dos funciones en then
+
+
+
 }
 
 function MostarLogin()
